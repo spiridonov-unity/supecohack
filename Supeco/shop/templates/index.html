@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+{% block title %}<title>Supeco</title>{% endblock %}
+{% block content %}
+<table>
+    <tr>
+        {% block main_header %}
+        <td rowspan="2">
+            <div class="header">
+                {% block header %}<h3>Предложения</h3>{% endblock %}
+            </div>
+        </td>
+        <td class="section_bg"></td>
+        <td class="section_right"></td>
+        {% endblock %}
+    </tr>
+</table>
+<table class="products">
+    {% for product in products %}
+        {% cycle '<tr>' '' '' '' %}
+        {% include 'product.html' %}
+        {% if forloop.last %}
+                </tr>
+        {% else %}
+            {% cycle '' '' '' '</tr>' %}
+        {% endif %}
+    {% endfor %}
+</table>
+{% endblock %}

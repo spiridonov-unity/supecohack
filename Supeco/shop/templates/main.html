@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% block title %}<title>Supeco</title>{% endblock %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    {% block description %}
+    <meta name="description" content="supeco"/>
+    {% endblock %}
+    {% block keywords %}
+    <meta name="keywords" content="supeco"/>
+    {% endblock %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css"/>
+    <script type="text/javascript" src="{% static ' js/functions.js' %}"></script>
+    <link href="{% static 'favicon.ico' %}" rel="shortcut icon" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <img src="{% static 'images/header1.png' %}" alt="Шапка"/>
+    </div>
+    <div id="topmenu">
+        <ul>
+            <li>
+                <a href="{% url 'index' %}">Главная</a>
+            </li>
+            <li>
+                <img src="{% static 'images/topmenu_border.png' %}" alt=""/>
+            </li>
+            <li>
+                <a href="{% url 'investoram' %}">Инвесторам</a>
+            </li>
+            <li>
+                <img src="{% static 'images/topmenu_border.png' %}" alt=""/>
+            </li>
+            <li>
+                <a href="{% url 'enterpriser' %}">Предпринимателям</a>
+            </li>
+            <li>
+                <img src="{% static 'images/topmenu_border.png' %}" alt=""/>
+            </li>
+            <li>
+                <a href="{% url 'index' %}">Документы</a>
+            </li>
+            <li>
+                <img src="{% static 'images/topmenu_border.png' %}" alt=""/>
+            </li>
+            <li>
+                <a href="">О платформе</a>
+            </li>
+            <li>
+                <img src="{% static 'images/topmenu_border.png' %}" alt=""/>
+            </li>
+        </ul>
+        <div id="search">
+            <form name="search" action="" method="get">
+                <table>
+                    <tr>
+                        <td class="input_left"></td>
+                        <td>
+                            {{ search_form.q }}
+                        </td>
+                        <td class="input_right"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div id="content">
+        <div id="left">
+            <div class="menu">
+                <div class="header">
+                    <h3>Разделы</h3>
+                </div>
+                <div class="items">
+                    {% for section in sections %}
+                        <p>
+                            <a href="{{ section.get_absolute_url }}">{{ section.title}}</a>
+                        </p>
+                    {% endfor %}
+                </div>
+                <div class="bottom"></div>
+            </div>
+            <div class="menu">
+                <div class="header">
+                    <h3>Пользователь</h3>
+                </div>
+                <div class="items">
+                    {% if user.is_authenticated %}
+                        <p>
+                            <a href="{% url 'logout' %}?next={{ request.path }}">Выход</a>
+                        </p>
+                        <p>
+                            <a href="{% url 'orders' %}">Ваши инвестиции</a>
+                        </p>
+                    {% else %}
+                        <p>
+                            <a href="{% url 'login' %}?next={{ request.path }}">Вход</a>
+                        </p>
+                    {% endif %}
+                </div>
+                <div class="bottom"></div>
+            </div>
+        </div>
+        <div id="right">
+            {% block before_content %}{% endblock %}
+            {% block content %}{% endblock %}
+            {% block pagination %}{% endblock %}
+        </div>
+        <div class="clear"></div>
+        <div id="footer">
+            <div id="pm">
+                <table>
+                    <tr>
+                        <td>Способы оплаты:</td>
+                        <td>
+                            <img src="{% static 'images/pm.png' %}" alt="Способы оплаты"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="copy">
+                <p>Copyright &copy; Supeco.ru. Все права защищены.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

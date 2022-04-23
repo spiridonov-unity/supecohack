@@ -1,0 +1,10 @@
+<td>
+    <div class="intro_product">
+        <p class="img">
+            <img src="{{MEDIA_URL }}{{ product.image.url }}" alt="{{ product.title }}"/>
+        </p>
+        <p>
+            <a class="link_other" href="{% url 'product' product.pk %}"></a>
+        </p>
+    </div>
+</td>

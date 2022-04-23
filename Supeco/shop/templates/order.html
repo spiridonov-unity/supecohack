@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+{% block title %}<title>Платёж</title>{% endblock %}
+{% block description %}
+<meta name="description" content="supeco"/>
+{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="платёж"/>
+{% endblock %}
+{% block content %}
+<div id="order">
+    <h2>Оформление платежа</h2>
+    <form name="order" action="" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td class="w120">ФИО</td>
+                <td>
+                    <input type="text" name="name" value=""/>
+                </td>
+            </tr>
+            <tr>
+                <td>Телефон</td>
+                <td>
+                    <input type="text" name="phone" value=""/>
+                </td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>
+                    <input type="text" name="email" value=""/>
+                </td>
+            </tr>
+            <tr>
+                <td>Сумма платежа</td>
+                <td>
+                    <input type="number" name="price" value=""/>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="button">
+                    {% load static %}
+                    <input type="hidden" name="func" value="order"/>
+                    <input type="image" src="{% static 'images/order_end.png'%}" alt="Закончить оформление платежа"
+                           onmouseover="this.src='{% static 'images/order_end_active.png' %}'"
+                           onmouseout="this.src='{% static 'images/order_end.png' %}'"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% endblock %}

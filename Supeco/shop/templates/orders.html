@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% block title %}<title>Ваши инвестиции</title>{% endblock %}
+{% block description %}
+<meta name="description" content="supeco"/>
+{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="платёж"/>
+{% endblock %}
+{% block content %}
+<div id="article">
+    <h2>Инвестиции</h2>
+    <table border="1" id ="orders">
+        <tr>
+            <td>ID</td>
+            <td>name</td>
+            <td>phone</td>
+            <td>status</td>
+            <td>date_order</td>
+            <td>price</td>
+        </tr>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.name }}</td>
+                <td>{{ order.phone }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.date_order }}</td>
+                <td>{{ order.price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

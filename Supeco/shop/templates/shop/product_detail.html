@@ -1,0 +1,58 @@
+{% extends 'main.html' %} {% block title %}<title>{{ product.title }}</title>{% endblock %}
+{% block description %}
+<meta name="description" content="Описание и платёж {{ product.title }}"/>
+{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="описание {{ product.title|lower }}, платёж {{ product.title|lower }}"/>
+{% endblock %}
+{% block content %}
+<table id="hornav">
+    <tr>
+        {% load static %}
+        <td>
+            <a href="{% url 'index' %}">Главная</a>
+        </td>
+        <td>
+            <img src="{% static 'images/hornav_arrow.png' %}" alt=""/>
+        </td>
+        <td>
+            <a href="{{ product.section.get_absolute_url }}">{{ product.section.title }}</a>
+        </td>
+        <td>
+            <img src="{% static 'images/hornav_arrow.png' %}" alt=""/>
+        </td>
+        <td>{{ product.title }}</td>
+    </tr>
+</table>
+<table id="product">
+    <tr>
+        <td class="product_img">
+            <img src="{{ product.image.url }}" alt="{{ product.section.title }}"/>
+        </td>
+        <td class="product_desc">
+            <p>Название: <span class="title">{{ product.title }}</span></p>
+            <p>Раздел: <span>{{ product.section.title }}</span></p>
+            <p>Регион: <span>{{ product.country }}</span></p>
+            <p>Адрес: <span>{{ product.address }}</span></p>
+            <table>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <p>
+                            <a class="link_invest"
+                               href="{% url 'login' %}"></a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <p class="desc_title">Описание:</p>
+            <p class="desc">{{ product.description }}</p>
+        </td>
+    </tr>
+</table>
+{% endblock %}
